@@ -19,9 +19,21 @@ namespace AutoLotModel
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>()
+                .Property(e => e.LastName)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Orders)
                 .WithOptional(e => e.Customer)
                 .WillCascadeOnDelete();
+
+            modelBuilder.Entity<Inventory>()
+                .Property(e => e.Make)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Inventory>()
+                .Property(e => e.Color)
+                .IsFixedLength();
 
             modelBuilder.Entity<Inventory>()
                 .HasMany(e => e.Orders)
